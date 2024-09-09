@@ -18,3 +18,25 @@ function callInternalFunction() public view returns(uint){
 }
 }
 ```
+When an internal function is called, there is no external call overhead because the function resides within the same code unit (i.e., the same contract or an inherited contract). Solidity simply "jumps" to the location of the internal function’s code, making the execution fast and gas-efficient.
+Call Internall Function from inherit contract
+```solidity
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.24;
+contract internalFun{
+uint Data = 10;
+function internalFunction() internal view returns(uint){
+    return Data;
+}
+function callInternalFunction() public view returns(uint){
+    return internalFunction();
+}
+}
+contract iheritExample is internalFun{
+    function callInternalInheri() public view returns(uint){
+        return internalFunction();
+    }
+}
+```
+By default, function types are internal,
+
