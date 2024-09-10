@@ -70,6 +70,27 @@ contract FunctionReferenceExample {
     }
 }
 ```
+```solidity
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.0;
+contract CompareValues {
+    
+    function(uint, uint) internal pure returns (uint) compareFunction;
+
+    constructor() {
+        compareFunction = getMax;  
+    }
+
+    function getMax(uint a, uint b) internal pure returns (uint) {
+        return a >= b ? a : b;
+    }
+
+    function compare(uint x, uint y) public view returns (uint) {
+        return compareFunction(x, y);  
+    }
+}
+```
+
 In Solidity, internal functions can be called from the current contract, but this also includes internal functions from libraries and inherited contracts. Let’s break this down further
 ```solidity
 //SPDX-License-Identifier:MIT
@@ -85,5 +106,6 @@ contract Example {
     }
     }
 ```
+
 
 
