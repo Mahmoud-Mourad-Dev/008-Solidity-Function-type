@@ -40,9 +40,50 @@ contract iheritExample is internalFun{
 ```
 By default, function types are internal,
 Internal Function References
+This line is not a function, but rather a declaration of a variable that can hold a reference to a function
 ```solidity
 function(<paramTypes>) internal returns (<returnTypes>) functionVariable;
 ```
 
+The variable addFunction is a function type variable that can store a reference to an internal function which takes two uint parameters and returns a uint value.
+This variable itself doesn't implement any logic; it's a placeholder that can later be assigned a specific internal function (like AddFunction).
+```solidity
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.0;
+
+contract FunctionReferenceExample {
+    // Declare a function type variable
+    function(uint, uint) internal returns (uint) addFunction;
+
+    // Internal function to add two numbers
+    function AddFunction(uint a, uint b) internal pure returns (uint) {
+        return a + b;
+    }
+
+    // Assign and use the function type variable
+    function setFunction() public {
+        addFunction = AddFunction;  // Assign the internal function to the function type variable
+    }
+
+    function callAddFunction(uint a, uint b) public  returns (uint) {
+        return addFunction(a, b);  // Call the referenced function
+    }
+}
+```
+In Solidity, internal functions can be called from the current contract, but this also includes internal functions from libraries and inherited contracts. Let’s break this down further
+```solidity
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.0;
+library MathLib {
+    function add(uint a, uint b) internal pure returns (uint) {
+        return a + b;
+    }
+}
+contract Example {
+    function useAdd(uint a, uint b) public pure returns (uint) {
+        return MathLib.add(a, b);  // Calling an internal library function
+    }
+    }
+```
 
 
