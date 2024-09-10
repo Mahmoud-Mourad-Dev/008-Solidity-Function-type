@@ -39,4 +39,10 @@ contract iheritExample is internalFun{
 }
 ```
 By default, function types are internal,
+Internal Function References
+```solidity
+function(<paramTypes>) internal returns (<returnTypes>) functionVariable;
+```
+
+
 
