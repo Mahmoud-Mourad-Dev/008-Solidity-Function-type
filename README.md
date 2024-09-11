@@ -165,6 +165,7 @@ contract Example {
 External functions
 When a contract calls an external function (whether in the same contract or another contract), it refers to both the address of the contract where the function resides and the function signature.
 The address tells the Ethereum Virtual Machine (EVM) where the contract is located.
+Function Signature: The function signature is composed of the function name and parameter types, 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -178,7 +179,7 @@ contract ContractA {
 contract ContractB {
     // Function to call an external function in another contract
     function callExternalFunction(address contractAddress, uint a, uint b) public  returns (uint) {
-        // Define a variable to hold the external function
+        //  defines a variable externalFunc that refers to an external function
         function (uint, uint) external returns (uint) externalFunc;
 
         // Assign the external function from ContractA
@@ -189,6 +190,13 @@ contract ContractB {
     }
 }
 ```
+Function types are notated as follows:
+```solidity
+
+function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
+```
+
+
 
 
 
