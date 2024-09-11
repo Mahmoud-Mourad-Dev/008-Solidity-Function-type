@@ -1,8 +1,53 @@
 # 008-Solidity-Function-type
+Functions are the most important element of a smart contract after state variable,function accept parameters and return values,Functions are the heart of the code
 Function types come in two flavours - internal and external functions:
+
 ```solidity
 function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
 ```
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.7.0 <0.9.0;
+contract functionNoParameter{
+function appleProduct() public pure returns(uint){
+uint ipadPro=1000;
+uint ipadAir=1200;
+return ipadPro+ipadAir;
+}
+}
+```
+Function take single incoming parameter
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.7.1 <0.9.0;
+contract functionOneParameter{
+function appleProduct(uint ipadPrice) public pure returns(uint){
+return ipadPrice*5;
+}
+}
+
+```
+Function take maltiple incoming parameter
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.7.0 <0.9.0;
+contract functionTwoParameter{
+function appleProduct(uint iphone, uint ipad) public pure returns(uint){
+return iphone + ipad;
+}
+}
+```
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.7.0 <0.9.0;
+contract functionTwoOutput{
+function appleProduct(uint ipadPrice) public pure returns(uint doupleIpadPrice,uint thirdIpadPrice){
+doupleIpadPrice=ipadPrice*2;
+thirdIpadPrice=ipadPrice*3;
+}
+}
+```
+
 Internal Function 
 In Solidity, internal functions are functions that can only be called from within the same contract or contracts that inherit from it
 ```solidity
