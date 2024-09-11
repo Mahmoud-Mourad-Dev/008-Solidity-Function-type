@@ -47,6 +47,17 @@ thirdIpadPrice=ipadPrice*3;
 }
 }
 ```
+Function return maltiple values as tuple
+tuple :- is custom data structure consisting of maltiple varaiables in group
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.7.0 <0.9.0;
+contract functionTupleOutput{
+function appleProduct(uint ipadPrice) public pure returns(uint doupleIpadPrice,uint thirdIpadPrice){
+(doupleIpadPrice,thirdIpadPrice)=(ipadPrice*2,ipadPrice*3);
+}
+}
+```
 
 Internal Function 
 In Solidity, internal functions are functions that can only be called from within the same contract or contracts that inherit from it
@@ -151,6 +162,34 @@ contract Example {
     }
     }
 ```
+External functions
+When a contract calls an external function (whether in the same contract or another contract), it refers to both the address of the contract where the function resides and the function signature.
+The address tells the Ethereum Virtual Machine (EVM) where the contract is located.
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract ContractA {
+    // External function in ContractA
+    function externalFunction(uint a, uint b) external pure returns (uint) {
+        return a + b;
+    }
+}
+
+contract ContractB {
+    // Function to call an external function in another contract
+    function callExternalFunction(address contractAddress, uint a, uint b) public  returns (uint) {
+        // Define a variable to hold the external function
+        function (uint, uint) external returns (uint) externalFunc;
+
+        // Assign the external function from ContractA
+        externalFunc = ContractA(contractAddress).externalFunction;
+
+        // Call the external function and return the result
+        return externalFunc(a, b);
+    }
+}
+```
+
 
 
 
