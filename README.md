@@ -192,9 +192,27 @@ contract ContractB {
 ```
 Function types are notated as follows:
 ```solidity
-
 function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
 ```
+
+Incorrect Usage (causes a compilation error):
+```Solidity
+function logData() public pure returns () {
+    // This will cause an error because return types cannot be empty
+}
+```
+The Conversion Conditions for Function Types:
+Identical Parameter Types:
+The function signature's parameter types must be exactly the same for both A and B.
+pure functions can be converted to view and non-payable functions
+view functions can be converted to non-payable functions
+payable functions can be converted to non-payable functions
+
+
+
+
+
+
 
 
 
