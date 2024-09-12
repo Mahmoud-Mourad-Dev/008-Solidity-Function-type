@@ -201,17 +201,87 @@ function logData() public pure returns () {
     // This will cause an error because return types cannot be empty
 }
 ```
-The Conversion Conditions for Function Types:
-Identical Parameter Types:
-The function signature's parameter types must be exactly the same for both A and B.
-pure functions can be converted to view and non-payable functions
-view functions can be converted to non-payable functions
-payable functions can be converted to non-payable functions
+Function Visibility
+|visibility| Definition|
+|----------|---------|
+|Internal|Restricted to the current contract and inherited contracts|
+|External|Called only from outside the contract but accessible via this for internal calls|
+|Public|Accessible from both inside and outside the contract|
+Private|Accessible only within the contract that defines it, not even by inherited contracts|
 
+Internal Functions
+Definition: Functions marked as internal can only be accessed inside the contract where they are defined or from derived contracts (contracts that inherit from the current contract).
+Scope: They cannot be called externally, including by other contracts or users.
+```solidity
+contract BaseContract {
+    function internalFunction() internal pure returns (string memory) {
+        return "This is an internal function";
+    }
+}
 
+contract DerivedContract is BaseContract {
+    function callInternalFunction() public pure returns (string memory) {
+        return internalFunction(); // Can call inherited internal function
+    }
+}
+```
+External Functions
+Definition: Functions marked as external can only be called from outside the contract. They can be called internally using this.functionName().
+Scope: They are accessible to other contracts or external users via transactions or external function calls.
+Usage: external functions are typically used when interaction with the contract is required from outside (e.g., users or other contracts interacting with the contract on the blockchain).
+```solidity
+/SPDX-License-Identifier:MIT
+pragma solidity ^0.8.0;
+    contract ExternalFunctionContract {
+    function externalFunction() external pure returns (string memory) {
+        return "This is an external function";
+    }
 
+    function callExternalFunction() public view returns (string memory) {
+        // Cannot call externalFunction() directly within the same contract
+        // return externalFunction();  // This will cause an error
 
+        // You can call it via 'this'
+        return this.externalFunction();
+    }
+}
+```
+Public Functions
+Definition: Functions marked as public can be called both externally and internally. They are accessible by any external entity as well as by other functions within the contract.
+Scope: Public functions are open to both internal calls (within the contract or derived contracts) and external calls (from users or other contracts).
+Usage: These functions are commonly used when you want them to be accessible from both inside and outside the contract.
+```solidity
+contract PublicFunctionContract {
+    function publicFunction() public pure returns (string memory) {
+        return "This is a public function";
+    }
 
+    function callPublicFunction() public view returns (string memory) {
+        return publicFunction();  // Can call internally
+    }
+}
+```
+Private Functions
+Definition: Functions marked as private can only be called inside the contract where they are defined. They are not accessible by derived contracts or externally.
+Scope: Only the contract that defines the private function can access it.
+Usage: private functions are useful when you want to restrict a function's use entirely to the contract that defines it, even excluding inherited contracts.
+```solidity
+contract PrivateFunctionContract {
+    function privateFunction() private pure returns (string memory) {
+        return "This is a private function";
+    }
+
+    function callPrivateFunction() public pure returns (string memory) {
+        return privateFunction();  // Can call internally within the same contract
+    }
+}
+
+contract DerivedContract is PrivateFunctionContract {
+    // function callPrivate() public pure returns (string memory) {
+    //     return privateFunction(); // This will cause an error
+    // }
+}
+```
 
 
 
