@@ -10,9 +10,12 @@ Function Visibility
 Private|Accessible only within the contract that defines it, not even by inherited contracts|
 
 Internal Functions
-Definition: Functions marked as internal can only be accessed inside the contract where they are defined or from derived contracts (contracts that inherit from the current contract).
+Definition: Functions marked as internal can only be accessed inside the contract where they are defined or from derived contracts
+(contracts that inherit from the current contract).
 Scope: They cannot be called externally, including by other contracts or users.
 ```solidity
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.0;
 contract BaseContract {
     function internalFunction() internal pure returns (string memory) {
         return "This is an internal function";
@@ -30,7 +33,7 @@ Definition: Functions marked as external can only be called from outside the con
 Scope: They are accessible to other contracts or external users via transactions or external function calls.
 Usage: external functions are typically used when interaction with the contract is required from outside (e.g., users or other contracts interacting with the contract on the blockchain).
 ```solidity
-/SPDX-License-Identifier:MIT
+//SPDX-License-Identifier:MIT
 pragma solidity ^0.8.0;
     contract ExternalFunctionContract {
     function externalFunction() external pure returns (string memory) {
@@ -51,6 +54,8 @@ Definition: Functions marked as public can be called both externally and interna
 Scope: Public functions are open to both internal calls (within the contract or derived contracts) and external calls (from users or other contracts).
 Usage: These functions are commonly used when you want them to be accessible from both inside and outside the contract.
 ```solidity
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.0;
 contract PublicFunctionContract {
     function publicFunction() public pure returns (string memory) {
         return "This is a public function";
@@ -62,10 +67,14 @@ contract PublicFunctionContract {
 }
 ```
 Private Functions
-Definition: Functions marked as private can only be called inside the contract where they are defined. They are not accessible by derived contracts or externally.
+Definition: Functions marked as private can only be called inside the contract where they are defined.
+They are not accessible by derived contracts or externally.
 Scope: Only the contract that defines the private function can access it.
-Usage: private functions are useful when you want to restrict a function's use entirely to the contract that defines it, even excluding inherited contracts.
+Usage: private functions are useful when you want to restrict a function's use entirely to the contract that defines it,
+even excluding inherited contracts.
 ```solidity
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.0;
 contract PrivateFunctionContract {
     function privateFunction() private pure returns (string memory) {
         return "This is a private function";
@@ -91,7 +100,8 @@ contract DerivedContract is PrivateFunctionContract {
 
 View Functions
 Definition: Functions marked as view promise not to modify the state of the blockchain.
-Use case: They can read state variables, call other view functions, and do computations, but cannot alter state variables (like updating a balance, storing data, etc.).
+Use case: They can read state variables, call other view functions, and do computations, but cannot alter state variables
+(like updating a balance, storing data, etc.).
 ```solidity
 //SPDX-License-Identifier:MIT
 pragma solidity ^0.8.0;
@@ -118,7 +128,8 @@ pragma solidity ^0.8.0;
 ```
 Payable Functions
 Definition: Functions marked as payable allow the contract to receive Ether.
-Use case: This is necessary when you want to write a function that can accept Ether transfers. A payable function can also execute other logic beyond receiving Ether, such as updating balances or triggering events.
+Use case: This is necessary when you want to write a function that can accept Ether transfers. A payable function can also execute other logic beyond receiving Ether, 
+such as updating balances or triggering events.
 ```solidity
 //SPDX-License-Identifier:MIT
 pragma solidity ^0.8.0;
@@ -130,15 +141,6 @@ pragma solidity ^0.8.0;
     }
 }
 ```
-
-
-
-
-
-
-
-
-
 
 ```solidity
 function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
@@ -212,7 +214,8 @@ function callInternalFunction() public view returns(uint){
 }
 }
 ```
-When an internal function is called, there is no external call overhead because the function resides within the same code unit (i.e., the same contract or an inherited contract). Solidity simply "jumps" to the location of the internal function’s code, making the execution fast and gas-efficient.
+When an internal function is called, there is no external call overhead because the function resides within the same code unit
+(i.e., the same contract or an inherited contract). Solidity simply "jumps" to the location of the internal function’s code, making the execution fast and gas-efficient.
 Call Internall Function from inherit contract
 ```solidity
 //SPDX-License-Identifier:MIT
@@ -285,7 +288,8 @@ contract CompareValues {
 }
 ```
 
-In Solidity, internal functions can be called from the current contract, but this also includes internal functions from libraries and inherited contracts. Let’s break this down further
+In Solidity, internal functions can be called from the current contract, but this also includes internal functions from libraries and inherited contracts.
+Let’s break this down further
 ```solidity
 //SPDX-License-Identifier:MIT
 pragma solidity ^0.8.0;
@@ -305,7 +309,7 @@ When a contract calls an external function (whether in the same contract or anot
 The address tells the Ethereum Virtual Machine (EVM) where the contract is located.
 Function Signature: The function signature is composed of the function name and parameter types, 
 ```solidity
-// SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 contract ContractA {
     // External function in ContractA
@@ -335,7 +339,12 @@ function (<parameter types>) {internal|external} [pure|view|payable] [returns (<
 
 Incorrect Usage (causes a compilation error):
 ```Solidity
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract test{
 function logData() public pure returns () {
     // This will cause an error because return types cannot be empty
 }
+}
 ```
+
