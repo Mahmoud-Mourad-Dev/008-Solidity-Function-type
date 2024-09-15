@@ -7,7 +7,14 @@ Function Visibility
 |Internal|Restricted to the current contract and inherited contracts|
 |External|Called only from outside the contract but accessible via this for internal calls|
 |Public|Accessible from both inside and outside the contract|
-Private|Accessible only within the contract that defines it, not even by inherited contracts|
+|Private|Accessible only within the contract that defines it, not even by inherited contracts|
+
+|Visibility|Contract Itself|Drived Contract|Contract Externals|Extarnals Adresses|
+|----------|---------------|---------------|------------------|-------------------|
+|Internal|Yes|No|No|No|
+|External|No|No|Yes|Yes|
+|Public|Yes|Yes|Yes|Yes|
+|Private|Yes|No|No|No|
 
 Internal Functions
 Definition: Functions marked as internal can only be accessed inside the contract where they are defined or from derived contracts
@@ -97,6 +104,9 @@ contract DerivedContract is PrivateFunctionContract {
 |pure|Cannot read or modify state; pure computation|
 |payable|Can receive Ether|
 |Non-payable|Cannot receive Ether (default behavior unless payable is specified)|
+
+
+
 
 View Functions
 Definition: Functions marked as view promise not to modify the state of the blockchain.
