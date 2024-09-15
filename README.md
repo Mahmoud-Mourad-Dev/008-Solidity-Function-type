@@ -100,7 +100,7 @@ contract DerivedContract is PrivateFunctionContract {
 ```
 |Mutability|Defintion|
 |------------|----------------|
-|view|Can read but not modify state|
+|view|can read contract’s storage, but can’t modify the contract storage. Therefore, they are used for getters|
 |pure|Cannot read or modify state; pure computation|
 |payable|Can receive Ether|
 |Non-payable|Cannot receive Ether (default behavior unless payable is specified)|
@@ -112,6 +112,8 @@ View Functions
 Definition: Functions marked as view promise not to modify the state of the blockchain.
 Use case: They can read state variables, call other view functions, and do computations, but cannot alter state variables
 (like updating a balance, storing data, etc.).
+In previous Solidity versions, the keyword constant was used instead of view . It is now deprecated.
+
 ```solidity
 //SPDX-License-Identifier:MIT
 pragma solidity ^0.8.0;
@@ -357,4 +359,6 @@ function logData() public pure returns () {
 }
 }
 ```
+
+
 
