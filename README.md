@@ -11,10 +11,10 @@ Function Visibility
 
 |Visibility|Contract Itself|Drived Contract|Contract Externals|Extarnals Adresses|
 |----------|---------------|---------------|------------------|-------------------|
-|Internal|Yes|No|No|No|
-|External|No|No|Yes|Yes|
-|Public|Yes|Yes|Yes|Yes|
-|Private|Yes|No|No|No|
+|Internal|:Yes:|:No:|:No:|:No:|
+|External|:No:|:No:|:Yes:|:Yes:|
+|Public|:Yes:|:Yes:|:Yes:|:Yes:|
+|Private|:Yes:|:No:|:No:|:No:|
 
 Internal Functions
 Definition: Functions marked as internal can only be accessed inside the contract where they are defined or from derived contracts
