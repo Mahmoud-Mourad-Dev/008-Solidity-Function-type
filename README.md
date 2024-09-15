@@ -359,6 +359,34 @@ function logData() public pure returns () {
 }
 }
 ```
+Function take another function as a parameter
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract FunctionExample {
+    function add(uint a, uint b) internal pure returns (uint) {
+        return a + b;
+    }
+
+    function multiply(uint a, uint b) internal pure returns (uint) {
+        return a * b;
+    }
+
+    function executeOperation(uint x, uint y, function (uint, uint) internal pure returns (uint) operation) internal pure returns (uint) {
+        return operation(x, y);
+    }
+
+    function testAddFunction(uint x,uint y) public pure returns(uint){
+        return executeOperation(x,y,add);
+    }
+
+    function testMultiply(uint x,uint y) public pure returns(uint){
+        return executeOperation(x,y,multiply);
+    }
+}
+```
+
+
 
 
 
