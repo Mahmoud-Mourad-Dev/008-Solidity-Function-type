@@ -385,6 +385,26 @@ contract FunctionExample {
     }
 }
 ```
+The Selector Of The Function
+The selector of a function in Solidity is the first four bytes of its signature. The signature is determined by the function's name and the types of its parameters.
+How the selector is calculated:
+1-Convert the function name to its Keccak-256 hash.
+2-Take the first four bytes of the hash.
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.6.4 <0.9.0;
+
+contract Example {
+    function add(uint a,uint b) public pure returns(uint){
+        return a+b;
+    }
+    function getSelector() public pure returns(bytes4){
+        return bytes4(keccak256("add(uint,uint"));
+    }
+}
+```
+
+
 
 
 
